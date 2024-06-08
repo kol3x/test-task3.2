@@ -1,73 +1,66 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# Nest Application with Prisma
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+This repository contains a Nest.js application integrated with Prisma ORM to interact with a PostgreSQL database. Additionally, it includes a script to seed the database with a million user records.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## Setup
 
-## Description
+1. **Clone the repository:**
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+    ```bash
+    git clone https://github.com/kol3x/test-task3.2
+    ```
 
-## Installation
+2. **Install dependencies:**
 
-```bash
-$ npm install
-```
+    ```bash
+    cd test-task3.2
+    npm install
+    ```
 
-## Running the app
+3. **Set up PostgreSQL:**
 
-```bash
-# development
-$ npm run start
+    Ensure you have PostgreSQL installed and running on your system. You'll also need to create a database and set up your environment variables accordingly.
 
-# watch mode
-$ npm run start:dev
+4. **Set up environment variables:**
 
-# production mode
-$ npm run start:prod
-```
+    Create a `.env` file in the root of your project and configure the following variables:
 
-## Test
+    ```env
+    DATABASE_URL=postgresql://username:password@localhost:5432/your_database
+    ```
 
-```bash
-# unit tests
-$ npm run test
+    Replace `username`, `password`, and `your_database` with your PostgreSQL credentials and database name.
 
-# e2e tests
-$ npm run test:e2e
+5. **Run Migrations:**
 
-# test coverage
-$ npm run test:cov
-```
+    Run Prisma migrations to create the necessary tables in your database:
 
-## Support
+    ```bash
+    npx prisma migrate dev
+    ```
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+6. **Seed the Database:**
 
-## Stay in touch
+    To populate the database with a million users, run the following command:
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+    ```bash
+    npx ts-node prisma/seed.ts
+    ```
 
-## License
+    This script will generate and insert a million user records into your PostgreSQL database.
 
-Nest is [MIT licensed](LICENSE).
+7. **Start the Nest Application:**
+
+    Once the database is seeded, start the Nest.js application:
+
+    ```bash
+    npm run start
+    ```
+
+    The application will be accessible at `http://localhost:3000`.
+
+
+## Endpoints
+
+- **Reset User Problems:** `PUT /users/reset-problems`
+    - This endpoint resets the `problem` field for every user to `false`. 
